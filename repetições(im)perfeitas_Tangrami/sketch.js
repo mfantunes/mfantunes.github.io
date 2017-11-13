@@ -18,7 +18,7 @@ var cores=[];
 
 function setup() 
 {
-  createCanvas (595.28, 841.89, SVG);
+  createCanvas (595, 842, SVG);
   
   frameRate(1);
   cores[0]=color(230,49,90);
