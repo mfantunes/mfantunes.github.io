@@ -1,8 +1,8 @@
-var create, song, tamA, tamB,pos1, pos2;
+var create, songA,t, numLinhas;
 
 function preload()
 {
-  song = loadSound('assets/slot.mp3');
+  songA = loadSound('assets/slot.mp3');
 }
 function setup() 
 {
@@ -10,52 +10,23 @@ function setup()
   
   create=[];
 
-  pos1= 0;
-  pos2 = pos1;
-  tamA= width;
-  tamB= height;
-  prof= 2;
-
-
 }
-
 
 function draw() 
 {
   background(255);
 
   directionalLight(255,255,255, 1,1,-1);
-  //ambientLight(255);
-  
+ 
   for(var i=0; i<create.length; i++)
   {
-
-    if( verificaColisao (create[i].x), create[i].y, create[i].t, pos1, pos2, tamA, tamB, prof=== true)
-    {
-      song.play();
-    }
+    
     create[i].anima();
     create[i].desenha(); 
-  
-    
   }
 
-  push();
-    translate(pos1, pos2);
-    noStroke();
-    specularMaterial(250,250,250, 0);
-    box(tamA, tamB, prof);
-  pop();
   
 }
-
-function verificaColisao(x1, y1, t1, x2, y2, tamA, tamB, prof, pos1, pos2 )
-  {
-    var distEntrePontos = dist (x1,y1, pos1, pos2);
-    var somaTamanhos = t1/2 + tamA/2;
-
-    if (distEntrePontos <= somaTamanhos) return true;
-  }
 
 function mousePressed()
 {
@@ -65,9 +36,12 @@ function mousePressed()
 
   }
 
-  //song.play();
-   
-  append(create, new Objecto (novaPosicaoInterior.x*width, novaPosicaoInterior.y*height));
+  append(create, new Objecto (novaPosicaoInterior.x*width, novaPosicaoInterior.y*height, songA));
+
+  for(var i=0; i<create.length; i++)
+  {
+   create[i].click(mouseX, mouseY); 
+  }
 
 }
 
@@ -75,25 +49,58 @@ function mousePressed()
 
 class Objecto 
 {
-  constructor(x_,y_)
+  constructor(x_,y_,songA)
   {
     this.x =x_;
     this.y =y_;
     this.z =0;
     
-  
+    this.songA = songA;
     this.Ae = 0; // angulo externo;
     this.vAe = 0.5;
     this.r =20;
   }
+
+  click(px, py)
+  {
+    var d = dist(this.x,this.y, px,py)
+    if(d <= this.r)
+    {
+      if(px>0 && px <width && py >0 && py <(height/4)*1)
+      {
+        this.songA.play();
+        console.log('Clicou');
+      }
+
+      if(px>0 && px <width && py > (height/4)*1 && py <(height/4)*2)
+      {
+       // this.songA.play();
+        console.log('Clicou2');
+      }
+
+      if(px>0 && px <width && py >(height/4)*2 && py <(height/4)*3)
+      {
+        //this.songA.play();
+        console.log('Clicou3');
+      }
+
+      if(px>0 && px <width && py >(height/4)*3 && py <(height/4)*4)
+      {
+        //this.songA.play();
+        console.log('Clicou44');
+      }
+    }
+  }
+  
   anima()
   {
    
     if (this.Ae < 360) this.Ae += this.vAe;
     else this.Ae = 0;
-  
 
   }
+ 
+
 
   desenha()
   {
@@ -111,11 +118,9 @@ class Objecto
      pop();
     pop();
 
-  
+   // print(this.x, this.y);
   }
 }
-
-
 
 function windowResized() 
 {
