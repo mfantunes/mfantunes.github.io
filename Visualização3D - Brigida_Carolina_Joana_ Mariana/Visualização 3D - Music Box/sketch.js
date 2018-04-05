@@ -1,5 +1,5 @@
 /*
-Projeto: "Music Box"
+Projeto: "Visualização 3D - Music Box"
 Ano Lectivo (2017 - 2018)
 2º semestre
 3º Ano - Design Multimédia
@@ -9,8 +9,8 @@ Data de Avaliação: 06/04/2018
 
 
 Brígida Marques - 3150426
-Carolina Mendes
-Joana Oliveira
+Carolina Mendes - 3150413
+Joana Oliveira - 3150442
 Mariana Antunes - 3150135
 */
 
